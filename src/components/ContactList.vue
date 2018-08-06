@@ -7,16 +7,18 @@
           <label for="email">E-mail: </label>
           <input v-model="newContact.email" type="text" name="email"><br> <br>
           <button @click="addContact" type="submit">Add contact</button>
-      </form>
-      <table border="1">
+      </form><br>
+      <table border="1" align='center'>
           <thead>
               <th>Name</th>
               <th>email</th>
+              <th></th>
           </thead>
           <tbody>
               <tr v-for="(contact, key) in contacts" :key="key">
                 <td> {{ contact.name }} </td>
                 <td> {{ contact.email }} </td>
+                <td><button @click="deleteContact(contact)">Delete</button></td>
               </tr>
           </tbody>
       </table>
@@ -44,6 +46,10 @@ export default {
     addContact() {
       this.contacts.push(this.newContact);
       this.newContact = {};
+    },
+    deleteContact(contact) {
+      let index = this.contacts.indexOf(contact);
+      this.contacts.splice(index, 1);
     }
   }
 };
